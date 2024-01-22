@@ -1,34 +1,38 @@
 package programmersTest;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class test240119_0924_LV2_phoneBookList {
 	public static boolean solution(String[] phone_book) {
 		boolean answer = true;
-		HashMap<Integer, String> hash = new HashMap<Integer, String>();
 		List<String> list = Arrays.asList(phone_book);
 
+		Arrays.sort(phone_book);
 		for(int i=0;i<list.size();i++) {
-			hash.put(i, list.get(i));
+			System.out.println(list.get(i)+"  "+phone_book[i]);
+			if(i<list.size()-1 && !list.get(i).equals(phone_book[i+1])) {
+				if(list.get(i+1).startsWith(phone_book[i])) {
+					answer = false;
+					break;
+				}
+			}
 
-			list.stream()
-			.filter(it ->
-
-			it.startsWith(IntStream.range(0, list.size()).forEach(idx -> {
-				hash.get(idx);
-			})))
-
-			.findFirst().toString();
+			/*
+			 * list.stream() .filter(it ->
+			 *
+			 * it.startsWith(IntStream.range(0, list.size()).forEach(idx -> { hash.get(idx);
+			 * })))
+			 *
+			 * .findFirst().toString();
+			 */
 			/*
 			 * if(hash.get(i).startsWith()) { System.out.println(hash.get(i)); answer=false;
 			 * };
 			 */
 		};
 
-		return answer != false ? false : true;
+		return answer;
 	}
 
 	public static void main(String[] args){
