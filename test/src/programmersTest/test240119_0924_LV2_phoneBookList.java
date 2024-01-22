@@ -17,19 +17,6 @@ public class test240119_0924_LV2_phoneBookList {
 					break;
 				}
 			}
-
-			/*
-			 * list.stream() .filter(it ->
-			 *
-			 * it.startsWith(IntStream.range(0, list.size()).forEach(idx -> { hash.get(idx);
-			 * })))
-			 *
-			 * .findFirst().toString();
-			 */
-			/*
-			 * if(hash.get(i).startsWith()) { System.out.println(hash.get(i)); answer=false;
-			 * };
-			 */
 		};
 
 		return answer;
