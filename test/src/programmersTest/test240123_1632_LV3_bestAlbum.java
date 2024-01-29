@@ -9,8 +9,40 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+
+
 public class test240123_1632_LV3_bestAlbum {
 	public static int[] solution(String[] genres, int[] plays) {
+		// map<string, map<string, object>>
+		// [classic:[list:0_500/2_150, sum:1450], pop:[list, sum]]
+
+		// genre.length for...
+		// map.put();
+
+		// map.keyset sort...
+		// keyset = [pop, classic...]
+		// keyset.sort  o1 o2, -> compare(o1.get("sum"))
+
+		// keyset for string s : keyset
+		// map.get(s).get("list")
+		// split
+		// array.sort(new comp)
+
+
+		/**
+		 * Arrays.sort(playStringArray, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    String[] nums1 = o1.split("_");
+                    String[] nums2 = o2.split("_");
+                    int num1 = Integer.parseInt(nums1[1]);
+                    int num2 = Integer.parseInt(nums2[1]);
+                    return Integer.compare(num2, num1);
+                }
+            });
+		 */
+
+
 		//장르별 재생수 합 map
 		HashMap<String, Integer> genreToSum = new HashMap<>();
 
@@ -64,6 +96,7 @@ public class test240123_1632_LV3_bestAlbum {
 					if(cnt < 2) {
 						System.out.println(entry);
 						ans.add(playsIdx.indexOf(entry));
+						playsIdx.set(playsIdx.indexOf(entry), -1);
 						cnt++;
 					}
 				}
@@ -71,12 +104,14 @@ public class test240123_1632_LV3_bestAlbum {
 			sort.remove(sort.lastKey());
 		}
 
-		return answer = ans.stream().collect(Collectors.toList());
+		System.out.println(ans);
+
+		return answer = ans.stream().mapToInt(i->i).toArray();
 	}
 
 	public static void main(String[] args){
 		String[] new_id = {"classic", "pop", "classic", "classic", "pop"};
-		int[] new_id2 = {500, 600, 150, 800, 2500};
+		int[] new_id2 = {500, 600, 150, 500, 2500};
 
 
 		/**
