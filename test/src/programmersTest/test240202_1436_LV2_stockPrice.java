@@ -3,6 +3,7 @@ package programmersTest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class test240202_1436_LV2_stockPrice {
@@ -17,30 +18,58 @@ public class test240202_1436_LV2_stockPrice {
 	 *	- 현재 < 스캔중인거 => 계속 순회진행, i++된거 return
 	 */
 	public static int[] solution(int[] prices) {
-        int[] answer = {};
         List<Integer> priceList = new ArrayList<>(Arrays.stream(prices).boxed().collect(Collectors.toList()));
+		List<Integer> answer = new ArrayList<>();
 
-        for(int i=0;i<prices.length;i++) {
-        	int nowScan = prices[i];
-        	int cnt = 0;
-        	System.out.println("");
-        	for(int j=0;j<priceList.size();j++) {
-        		if(i >= j) continue;
-        		else {
-        			if(nowScan <= priceList.get(j)) {
-        				cnt++;
-        				System.out.println("cnt "+cnt);
-        			}else if(nowScan > priceList.get(j)) {
-        				cnt++;
-        				System.out.println("cnt "+cnt);
-        				break;
-        			}
+		Stack<Integer> stk = new Stack<>();
 
-        		}
-        	}
-        }
 
-        return answer;
+//스택으로 역순으로 쌓아올린다
+		for(int i=prices.length-1;i>=0;i--) {
+
+
+			if((stk.size() > 1) && (stk.peek() > prices[i])) {
+				answer.add(1);
+			}else if(stk. < prices[i]){
+				answer.add();
+			}else{
+				answer.add(stk.size());
+			}
+
+			stk.add(prices[i]);
+
+
+
+
+		}
+
+		System.out.println(stk);
+		System.out.println(answer);
+
+//        for(int i=0;i<prices.length;i++) {
+//        	int nowScan = prices[i];
+//        	int cnt = 0;
+//        	System.out.println("");
+//        	for(int j=0;j<priceList.size();j++) {
+//        		if(i >= j) continue;
+//        		else {
+//        			if(nowScan <= priceList.get(j)) {
+//        				cnt++;
+//        			}else if(nowScan > priceList.get(j)) {
+//        				cnt++;
+//						answer.add(cnt);
+//        				break;
+//        			}
+//					if(j == priceList.size()-1){
+//						answer.add(cnt);
+//					}
+//
+//        		}
+//        	}
+//        }
+//		answer.add(0);
+//		System.out.println(answer);
+        return answer.stream().mapToInt(i->i).toArray();
 	}
 
 	public static void main(String[] args){
