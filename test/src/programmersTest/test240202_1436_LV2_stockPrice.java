@@ -30,6 +30,11 @@ public class test240202_1436_LV2_stockPrice {
 
 				//쌓인스택 중 스캔중인 숫자보다 작은 수들
 				//lowerNums = stk.stream().filter(f -> f < scan).mapToInt(k->k).boxed().collect(Collectors.toList());
+				/**
+				 * - 스택에서 쌓인애들 중 스캔중인 숫자보다 작은것들 분리
+				 *	- 그 중에서 최초로 작아지는 숫자의 자리를 구해서 전체 스택크기-자리번호
+				 *	- 만약 없다면 스택크기 그대로 넣음
+				 */
 
 				for(int j=stk.size()-1;j>0;j--) {
 					if(stk.get(j) < scan) {
