@@ -59,7 +59,6 @@ public class test240202_1436_LV2_stockPrice {
 
 		System.out.println("stk    "+stk);
 
-
 		Collections.reverse(answer);
 		System.out.println("answer "+answer);
 
