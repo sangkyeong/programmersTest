@@ -32,29 +32,46 @@ public class test240206_1456_LV2_truckThroughOfBridge {
 		int pick = truck.size()-1;
 
 		while(truck.size() > 0) {
-			int bridgeWei = 0;
+			//0으로 채움
+			for(int len=0;len<bridge_length;len++) {
+				bridgeInCar.add(0);
+
+				//안에있는 요소이동
+				if((bridgeInCar.size() > bridge_length) && (bridgeInCar.peek() == 0)) {
+					bridgeInCar.poll();
+					time++;
+
+				//0이아닌 요소가 나갈때 동작
+				}else if((bridgeInCar.size() > bridge_length) && (bridgeInCarWei != 0) && (bridgeInCar.peek() != 0)) {
+					bridgeInCar.poll();
+					bridgeInCarWei -= truck.pop();
+					if((pick >= 0) && ((bridgeInCarWei+truck.get(pick)) <= weight))
+						continue;
+					time++;
+
+				//모두 다 통과 시 중단
+				}else if((truck.size() == 0) && (bridgeInCarWei == 0)) {
+					break;
+				}
+			}
 
 			//다리위 차들의 총합은 하중을 초과할 수 없음
 			while((pick >= 0) && ((bridgeInCarWei+truck.get(pick)) <= weight)) {
 				bridgeInCar.add(truck.get(pick));
 				bridgeInCarWei += truck.get(pick);
 
-				//현재 차 무게
-				if(bridgeInCar.size() != 0)
-				bridgeWei = truck.get(pick);
+				if(bridgeInCar.size() >= bridge_length) {
+					if(bridgeInCar.peek() != 0)
+						truck.pop();
+					bridgeInCarWei -= bridgeInCar.poll();
+					time++;
+				}
+
+				if((truck.size() == 0) && (bridgeInCarWei == 0)) {
+					break;
+				}
 
 				pick--;
-			}
-
-			//초가 증가할 때마다 다리위 차의 위치는 앞으로 한 칸 가야 함
-			for(int len=0;len<bridge_length;len++) {
-				time++;
-
-				if(len == bridge_length-1) {
-					//다리위 통과하는 차의 무게빼기
-					bridgeInCar.poll();
-					bridgeInCarWei -= truck.pop();
-				}
 			}
 		}
 
@@ -62,9 +79,9 @@ public class test240206_1456_LV2_truckThroughOfBridge {
 	}
 
 	public static void main(String[] args){
-		int new_id = 100;
-		int new_id2 = 100;
-		int[] new_id3 = {10};
+		int new_id = 5;
+		int new_id2 = 5;
+		int[] new_id3 = {1, 1, 1, 1, 1, 2, 2};
 
 		System.out.println(solution(new_id, new_id2, new_id3));
 		//S0ystem.out.println(Arrays.toString(solution(N)));
