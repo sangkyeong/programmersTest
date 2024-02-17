@@ -1,7 +1,6 @@
 package programmersTest;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.ArrayList;
 import java.util.Stack;
 
 
@@ -27,47 +26,55 @@ public class test240206_1456_LV2_truckThroughOfBridge {
 		}
 
 		//다리위 차 대수
-		Queue<Integer> bridgeInCar = new LinkedList<>();
+		ArrayList<Integer> bridgeInCar = new ArrayList<>(bridge_length);
 		int bridgeInCarWei = 0;
 		int pick = truck.size()-1;
+		boolean loopBreak = false;
 
-		while(truck.size() > 0) {
+		while(!truck.isEmpty()) {
 			//0으로 채움
 			for(int len=0;len<bridge_length;len++) {
 				bridgeInCar.add(0);
 
 				//안에있는 요소이동
-				if((bridgeInCar.size() > bridge_length) && (bridgeInCar.peek() == 0)) {
-					bridgeInCar.poll();
+				if((bridgeInCar.size() > bridge_length) && (bridgeInCar.getFirst() == 0)) {
+					bridgeInCar.removeFirst();
 					time++;
 
 				//0이아닌 요소가 나갈때 동작
-				}else if((bridgeInCar.size() > bridge_length) && (bridgeInCarWei != 0) && (bridgeInCar.peek() != 0)) {
-					bridgeInCar.poll();
+				}else if((bridgeInCar.size() > bridge_length) && (bridgeInCarWei != 0) && (bridgeInCar.getFirst() != 0)) {
+					bridgeInCar.removeFirst();
 					bridgeInCarWei -= truck.pop();
-					if((pick >= 0) && ((bridgeInCarWei+truck.get(pick)) <= weight))
-						continue;
+					if((pick >= 0) && ((bridgeInCarWei+truck.get(pick)) <= weight)) {
+						loopBreak = true;
+						break;
+					}
 					time++;
 
 				//모두 다 통과 시 중단
-				}else if((truck.size() == 0) && (bridgeInCarWei == 0)) {
+				}else if((truck.isEmpty()) && (bridgeInCarWei == 0)) {
 					break;
 				}
 			}
 
 			//다리위 차들의 총합은 하중을 초과할 수 없음
 			while((pick >= 0) && ((bridgeInCarWei+truck.get(pick)) <= weight)) {
+				if(loopBreak){
+					bridgeInCar.removeLast();
+					time++;
+				}
+				loopBreak = false;
 				bridgeInCar.add(truck.get(pick));
 				bridgeInCarWei += truck.get(pick);
 
 				if(bridgeInCar.size() >= bridge_length) {
-					if(bridgeInCar.peek() != 0)
+					if(bridgeInCar.getFirst() != 0)
 						truck.pop();
-					bridgeInCarWei -= bridgeInCar.poll();
+					bridgeInCarWei -= bridgeInCar.removeFirst();
 					time++;
 				}
 
-				if((truck.size() == 0) && (bridgeInCarWei == 0)) {
+				if((truck.isEmpty()) && (bridgeInCarWei == 0)) {
 					break;
 				}
 
@@ -81,7 +88,7 @@ public class test240206_1456_LV2_truckThroughOfBridge {
 	public static void main(String[] args){
 		int new_id = 5;
 		int new_id2 = 5;
-		int[] new_id3 = {1, 1, 1, 1, 1, 2, 2};
+		int[] new_id3 = {1, 1, 1, 1, 1, 2, 2, 2, 2};
 
 		System.out.println(solution(new_id, new_id2, new_id3));
 		//S0ystem.out.println(Arrays.toString(solution(N)));
