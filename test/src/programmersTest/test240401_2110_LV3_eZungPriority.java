@@ -3,7 +3,6 @@ package programmersTest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 public class test240401_2110_LV3_eZungPriority {
     public static int[] solution(String[] operations) {
