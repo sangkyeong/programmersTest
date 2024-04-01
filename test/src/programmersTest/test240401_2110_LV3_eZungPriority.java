@@ -38,6 +38,38 @@ public class test240401_2110_LV3_eZungPriority {
 		return answer;
 	}
 
+	//2중 for문 & arraylist사용
+//	int[] answer = {0,0};
+//	ArrayList<Integer> list = new ArrayList<>();
+//
+//        for (String operation : operations) {
+//		String[] mem = operation.split(" ");
+//		for (int j = 0; j < mem.length; j++) {
+//			switch (mem[j]) {
+//				case "I":
+//					list.add(Integer.parseInt(mem[j + 1]));
+//					Collections.sort(list);
+//					break;
+//				case "D":
+//					if ((!list.isEmpty()) && (mem[j + 1].equals("1"))) {
+//						list.removeLast();
+//					} else if ((!list.isEmpty()) && (mem[j + 1].equals("-1"))) {
+//						list.removeFirst();
+//					}
+//					break;
+//			}
+//
+//		}
+//	}
+//
+//		if(!list.isEmpty()){
+//		answer[0] = list.getLast();
+//		answer[1] = list.getFirst();
+//	}
+//		System.out.println(Arrays.toString(answer));
+//		return answer;
+//}
+
 	public static void main(String[] args){
 		String[] new_id = {"I 16", "I -5643", "D -1", "D 1", "D 1", "I 123", "D -1"};
 		
