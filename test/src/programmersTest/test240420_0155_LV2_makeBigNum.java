@@ -30,9 +30,9 @@ public class test240420_0155_LV2_makeBigNum {
 			}
 		}
 
-		for(int j=0;j<stk.size();j++){
-			answer.append(stk.get(j));
-		}
+        for (Integer integer : stk) {
+            answer.append(integer);
+        }
 		System.out.println(stk);
 
 		return answer.toString();
