@@ -5,14 +5,13 @@ import java.util.stream.Collectors;
 
 public class test240502_2200_LV1_minSquere {
     public static int solution(int[][] sizes) {
-		TreeSet<Integer> minList= new TreeSet<>();
-		TreeSet<Integer> maxList= new TreeSet<>();
+		int max = 0, min = 0;
 
 		for(int i =0;i< sizes.length;i++){
-			maxList.add(Math.max(sizes[i][0], sizes[i][1]));
-			minList.add(Math.min(sizes[i][0], sizes[i][1]));
+			max = Math.max(max, Math.max(sizes[i][0], sizes[i][1]));
+			min = Math.max(min, Math.min(sizes[i][0], sizes[i][1]));
 		}
-		return maxList.getLast()*minList.getLast();
+		return max*min;
     }
 
 	public static void main(String[] args){
